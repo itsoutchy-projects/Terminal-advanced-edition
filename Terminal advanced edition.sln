@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminal advanced edition", "Terminal advanced edition.csproj", "{2039D79A-3D41-4140-98E9-6CCC24C5B178}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Description = Terminal, but advanced!
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2039D79A-3D41-4140-98E9-6CCC24C5B178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2039D79A-3D41-4140-98E9-6CCC24C5B178}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2039D79A-3D41-4140-98E9-6CCC24C5B178}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2039D79A-3D41-4140-98E9-6CCC24C5B178}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C6308041-B6D1-40D4-BE41-165D2B81427C}
+	EndGlobalSection
+EndGlobal

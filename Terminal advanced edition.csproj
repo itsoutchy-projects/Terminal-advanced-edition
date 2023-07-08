@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Terminal_advanced_edition</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <!--<ItemGroup>
+    <Compile Remove="Program.cs" />
+  </ItemGroup>-->
+
+  <ItemGroup>
+    <None Remove="iconImage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="icon.ico" />
+    <Content Include="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="iconImage.png" />
+  </ItemGroup>
+
+</Project>
