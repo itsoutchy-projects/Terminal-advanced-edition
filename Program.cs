@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Security.Principal;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Terminal_advanced_edition
 {
@@ -188,6 +189,8 @@ namespace Terminal_advanced_edition
                 if (command.Contains("url"))
                 {
                     string[] cmdSplit = command.Split(" ");
+                    //commandList.ContainsRelevantValue(cmdSplit);
+                    //extensionMethods.ContainsRelevantValue(commandList, cmdSplit);
                     if (cmdSplit.Length != 1)
                     {
                         if (cmdSplit[0].ToLower() == "url")
@@ -223,9 +226,9 @@ namespace Terminal_advanced_edition
         }
 
         /// <summary>
-        /// Checks if the application is being Run As Administrator <para><c>Warning: can only be used on windows</c></para>
+        /// Checks if the application is being Run As Administrator 
         /// </summary>
-        /// <returns><see cref="bool"/> indicating if the application is being Run As Administrator</returns>
+        /// <returns><see cref="bool"/> indicating if the application is being Run As Administrator, or false if the platform is not Windows</returns>
         public static bool admin()
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT) {
@@ -237,6 +240,29 @@ namespace Terminal_advanced_edition
             {
                 return false;
             }
+            // <para><c>Warning: can only be used on windows</c></para> in case it needs to be put back here
+        }
+    }
+
+    /// <summary>
+    /// Testing class which may or may not end up getting updated
+    /// </summary>
+    public static class extensionMethods
+    {
+        /// <summary>
+        /// Does <paramref name="collection"/> contain <paramref name="relevantValue"/>?
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection">The <see cref="ICollection{T}"/> to use for checking</param>
+        /// <param name="relevantValue">The value used</param>
+        /// <returns><see cref="bool"/> indicating if <paramref name="collection"/> contains <paramref name="relevantValue"/></returns>
+        public static bool ContainsRelevantValue<T>(this ICollection<T> collection, object relevantValue)
+        {
+            foreach (dynamic val in collection)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
