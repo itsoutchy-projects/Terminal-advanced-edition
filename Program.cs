@@ -10,7 +10,13 @@ namespace Terminal_advanced_edition
         public static List<Command> commandList = new List<Command>();
         static void Main()
         {
+            //string tempString = "";
             appMain();
+            //while (true)
+            //{
+            //    ConsoleKeyInfo key = Console.ReadKey();
+            //    tempString += key.KeyChar.ToString();
+            //}
         }
         static void listCommands()
         {
@@ -44,17 +50,25 @@ namespace Terminal_advanced_edition
             //await CheckCommand();
         }
 
+        [Obsolete("checkCommand is no longer used, please use test instead")]
         public static async Task CheckCommand()
         {
+            throw new NotSupportedException();
             await Task.Run(new Action(checkcmdInner));
         }
 
+        /// <summary>
+        /// <c>Warning: deprecated and does not function</c> <para>This will throw a <see cref="NotSupportedException"></see> when called</para>
+        /// </summary>
+        [Obsolete("checkcmdInner is no longer used, please use test instead")]
         public static void checkcmdInner()
         {
-            
-            checkcmdInner();
+            throw new NotSupportedException();
+            //checkcmdInner();
         }
-
+        /// <summary>
+        /// Starts taking user input and executing the correct commands
+        /// </summary>
         public static void test()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -208,6 +222,10 @@ namespace Terminal_advanced_edition
             }
         }
 
+        /// <summary>
+        /// Checks if the application is being Run As Administrator
+        /// </summary>
+        /// <returns><see cref="bool"/> indicating if the application is being Run As Administrator</returns>
         public static bool admin()
         {
             return (new WindowsPrincipal(WindowsIdentity.GetCurrent()))
