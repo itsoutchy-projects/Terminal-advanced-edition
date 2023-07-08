@@ -223,13 +223,20 @@ namespace Terminal_advanced_edition
         }
 
         /// <summary>
-        /// Checks if the application is being Run As Administrator
+        /// Checks if the application is being Run As Administrator <para><c>Warning: can only be used on windows</c></para>
         /// </summary>
         /// <returns><see cref="bool"/> indicating if the application is being Run As Administrator</returns>
         public static bool admin()
         {
-            return (new WindowsPrincipal(WindowsIdentity.GetCurrent()))
-                 .IsInRole(WindowsBuiltInRole.Administrator);
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT) {
+#pragma warning disable CA1416 // Validate platform compatibility
+                return (new WindowsPrincipal(WindowsIdentity.GetCurrent()))
+                     .IsInRole(WindowsBuiltInRole.Administrator);
+#pragma warning restore CA1416 // Validate platform compatibility
+            } else
+            {
+                return false;
+            }
         }
     }
 }
