@@ -3,12 +3,14 @@ using System.Diagnostics;
 using System.Security.Principal;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace Terminal_advanced_edition
 {
     internal class Program
     {
         public static List<Command> commandList = new List<Command>();
+        public static List<string> invalidNames = new List<string>();
         static void Main()
         {
             //string tempString = "";
@@ -21,6 +23,7 @@ namespace Terminal_advanced_edition
         }
         static void listCommands()
         {
+            // All the commands
             commandList.Add(new Command("cd", "Sets the current working directory to the provided path"));
             commandList.Add(new Command("writefile", "Writes a file to the provided path with the provided contents"));
             commandList.Add(new Command("echo", "Writes the provided text to the command line"));
@@ -30,6 +33,33 @@ namespace Terminal_advanced_edition
             commandList.Add(new Command("run", "Runs the file/executable at the provided path"));
             commandList.Add(new Command("cmd", "Opens cmd (command prompt) and closes Terminal Advanced"));
             commandList.Add(new Command("url", "Opens the provided url in the default web browser"));
+            commandList.Add(new Command("dir", "Lists all files and subfolders in a directory, if no directory is entered, it will use the current working directory"));
+
+            // All the invalid filenames
+            invalidNames.Add("con");
+            invalidNames.Add("com1");
+            invalidNames.Add("com2");
+            invalidNames.Add("com3");
+            invalidNames.Add("com4");
+            invalidNames.Add("com5");
+            invalidNames.Add("com6");
+            invalidNames.Add("com7");
+            invalidNames.Add("com8");
+            invalidNames.Add("com9");
+            invalidNames.Add("lpt1");
+            invalidNames.Add("lpt2");
+            invalidNames.Add("lpt3");
+            invalidNames.Add("lpt4");
+            invalidNames.Add("lpt5");
+            invalidNames.Add("lpt6");
+            invalidNames.Add("lpt7");
+            invalidNames.Add("lpt8");
+            invalidNames.Add("lpt9");
+            invalidNames.Add("prn");
+            invalidNames.Add("aux");
+            invalidNames.Add("nul");
+            invalidNames.Add("..");
+            invalidNames.Add("...");
         }
 
         static async void appMain()
@@ -89,7 +119,24 @@ namespace Terminal_advanced_edition
 
                         if (!path.Contains(@"C:\"))
                         {
-                            File.WriteAllText(Environment.CurrentDirectory + path, contents);
+                            bool invalid = false;
+                            foreach (string s in invalidNames)
+                            {
+                                if (Path.GetFileNameWithoutExtension(path) == s)
+                                {
+                                    invalid = true;
+                                    break;
+                                }
+                            }
+                            if (!invalid)
+                            {
+                                File.WriteAllText(Environment.CurrentDirectory + path, contents);
+                            } else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Could not write file: " + Path.GetFileName(path) + " because the name is invalid.");
+                                Console.ResetColor();
+                            }
                         }
                         else
                         {
@@ -170,7 +217,7 @@ namespace Terminal_advanced_edition
                         {
                             if (!cmdSplit[1].Contains(@"C:\"))
                             {
-                                ProcessStartInfo startInfo = new ProcessStartInfo(Environment.CurrentDirectory + cmdSplit[1]);
+                                ProcessStartInfo startInfo = new ProcessStartInfo(Environment.CurrentDirectory + @"\" + cmdSplit[1]);
                                 Process.Start(startInfo);
                             } else
                             {
@@ -197,6 +244,46 @@ namespace Terminal_advanced_edition
                         {
                             //List<string> l = (List<string>)Enumerable.Range(command.IndexOf(" "), command.Length).GroupBy(i => cmdSplit[1]).Select(x => x.ToList());
                             Process.Start(cmdSplit[1]);
+                        }
+                    }
+                }
+                if (command.Contains("dir"))
+                {
+                    string[] cmdSplit = command.Split(" ");
+                    if (cmdSplit[0].ToLower() == "dir" && cmdSplit.Length > 1)
+                    {
+                        string path = cmdSplit[1];
+                        if (!path.Contains(@"C:\"))
+                        {
+                            foreach (string f in Directory.GetDirectories(Environment.CurrentDirectory + path))
+                            {
+                                Console.WriteLine(Path.GetDirectoryName(f));
+                            }
+                            foreach (string f in Directory.GetFiles(Environment.CurrentDirectory + path))
+                            {
+                                Console.WriteLine(Path.GetFileName(f));
+                            }
+                        }
+                        else
+                        {
+                            foreach (string f in Directory.GetDirectories(path))
+                            {
+                                Console.WriteLine(Path.GetDirectoryName(f));
+                            }
+                            foreach (string f in Directory.GetFiles(path))
+                            {
+                                Console.WriteLine(Path.GetFileName(f));
+                            }
+                        }
+                    } else if (command == "dir")
+                    {
+                        foreach (string f in Directory.GetDirectories(Environment.CurrentDirectory))
+                        {
+                            Console.WriteLine(Path.GetDirectoryName(f));
+                        }
+                        foreach (string f in Directory.GetFiles(Environment.CurrentDirectory))
+                        {
+                            Console.WriteLine(Path.GetFileName(f));
                         }
                     }
                 }
