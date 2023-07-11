@@ -34,6 +34,7 @@ namespace Terminal_advanced_edition
             commandList.Add(new Command("cmd", "Opens cmd (command prompt) and closes Terminal Advanced"));
             commandList.Add(new Command("url", "Opens the provided url in the default web browser"));
             commandList.Add(new Command("dir", "Lists all files and subfolders in a directory, if no directory is entered, it will use the current working directory"));
+            //commandList.Add(new Command("clear", "Clears the console, will ask for confirmation."));
 
             // All the invalid filenames
             invalidNames.Add("con");
@@ -286,6 +287,20 @@ namespace Terminal_advanced_edition
                             Console.WriteLine(Path.GetFileName(f));
                         }
                     }
+                    //if (command.ToLower() == "clear")
+                    //{
+                    //    //Console.Write("Confirm you want to clear (Y/N)> ");
+                    //    //string YN = "";
+                    //    //while (Console.ReadLine() == null || Console.ReadLine() == "")
+                    //    //{
+                    //    //     YN = Console.ReadLine();
+                    //    //}
+                    //    //if (YN.ToLower() == "y")
+                    //    //{
+                    //        Console.Clear();
+                    //    Console.
+                    //    //}
+                    //}
                 }
                 var foundCmd = false;
                 var lowerCaseCmd = command.ToLower();
